@@ -19,6 +19,8 @@ Cenario: Troca de senha com sucesso
 @negativo @SenhaAtualIncorreta
 Cenario: Tentativa de troca de senha com senha atual inválida
   E que ele preencha todos os campos corretamente na tela de Troca de senha, exceto a senha atual
+    |  currentPassword  |  NewPassword  |  RepeatPassword    |
+    | <currentPassword> | <NewPassword> | <RepeatPassword>   |
   Quando ele aciona o botão de Change Password
   Então deverá ser apresentada a mensagem de senha inválida.
 
@@ -28,3 +30,10 @@ Cenario: Tentativa de troca de senha com nova senha diferente da senha repitida
   Quando ele tenta clicar no botão de Change Password
   Então o botão de Change Password deverá ser bloqueado
   E deverá ser apresentado a mensagem de "Both password must match".
+
+Exemplos: 
+  | currentPassword | NewPassword | RepeatPassword   |       message        |
+  |                 |             |                  |                      |
+  |                 |             |                  |                      |
+  |                 |             |                  |                      |
+  |                 |             |                  |                      |

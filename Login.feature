@@ -17,14 +17,15 @@ Cenario: Login valido
   Então a home deve ser apresentada
 
 @negativo @FazerLoginIncorreto
-Cenario: Tentativa de login com senha inválida
-  E que ele preenche todos os campos corretamente na tela de login exceto o campo senha
-  E que ele preenche a senha errada
-  Então deverá ser apresentada uma tela de erro informando que os dados são inválidos.
+Cenario: Tentativa de login com dados invalidos
+  E que ele preenche os campos com os seguintes dados:
+    | email     | senha   |
+    | <email>   | <senha> |
+  Então o sistema deverá apresentar a mensagem "<mensagem>"
 
-@negativo @ErrarSenha3Vezes
-Cenario: Tentativa de login com senha inválida mais de 3 vezes
-  E que ele preenche todos os campos corretamente na tela de login exceto o campo senha
-  E que ele preenche a senha errada
-  Quando ele errar a senha por mais de 3 vezes
-  Então deverá ser apresentada uma tela para redefinição de senha
+Exemplos: 
+  | email           | senha     | mensagem                                         |
+  | asdasdasdasdad  | Fernandes | Login Failed. Username or Password is incorrect  |
+  | juca@gmail.com  | asdasdasd | Login Failed. Username or Password is incorrect  |
+  | juca@gmail.com  |           | Login Failed. Username or Password is incorrect  |
+  |                 |           | Login Failed. Username or Password is incorrect  |
