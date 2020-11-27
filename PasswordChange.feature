@@ -16,24 +16,14 @@ Cenario: Troca de senha com sucesso
   Quando ele aciona o botão de Change Password
   Então deverá ser apresentada a mensagem de request completado com sucesso
 
-@negativo @SenhaAtualIncorreta
-Cenario: Tentativa de troca de senha com senha atual inválida
-  E que ele preencha todos os campos corretamente na tela de Troca de senha, exceto a senha atual
+@negativo @SenhasDiferentes
+Cenario: Tentativa de troca de senha com campos diferentes ou inválidos
+  E que ele preencha todos os campos com os seugintes dados:
     |  currentPassword  |  NewPassword  |  RepeatPassword    |
     | <currentPassword> | <NewPassword> | <RepeatPassword>   |
   Quando ele aciona o botão de Change Password
-  Então deverá ser apresentada a mensagem de senha inválida.
-
-@negativo @NovaSenhaDiferenteNaRepetição
-Cenario: Tentativa de troca de senha com nova senha diferente da senha repitida
-  E que ele preencha todos os campos corretamente na tela de Troca de senha, exceto uma senha diferente no campo de repetição de senha
-  Quando ele tenta clicar no botão de Change Password
-  Então o botão de Change Password deverá ser bloqueado
-  E deverá ser apresentado a mensagem de "Both password must match".
-
+  Então deverá ser apresentada a mensagem "<mensagem>" e o botão assume o estado "<botao>"
 Exemplos: 
-  | currentPassword | NewPassword | RepeatPassword   |       message        |
-  |                 |             |                  |                      |
-  |                 |             |                  |                      |
-  |                 |             |                  |                      |
-  |                 |             |                  |                      |
+  | currentPassword | NewPassword | RepeatPassword   |       message              |  botao        |
+  |     password    |   123456    |     654321       | "Both password must match" |  bloqueado    |
+  |     00000000    |   123456    |     123456       | "Incorrect password"       |  bloqueado    |

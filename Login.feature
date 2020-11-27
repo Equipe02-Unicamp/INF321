@@ -22,7 +22,6 @@ Cenario: Tentativa de login com dados invalidos
     | email     | senha   |
     | <email>   | <senha> |
   Então o sistema deverá apresentar a mensagem "<mensagem>"
-
 Exemplos: 
   | email           | senha     | mensagem                                         |
   | asdasdasdasdad  | Fernandes | Login Failed. Username or Password is incorrect  |
