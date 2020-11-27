@@ -10,18 +10,31 @@ Funcionalidade: Cadastro de conta
 Contexto:
   Dado que é o primeiro acesso de "Juca" na plataforma
 
+@positivo @CriarConta
+Cenario: Dados válidos
+  E que ele preenche a tela de cadastro com dados válidos:
+    |  first-name  |  last-name  |  Country  |  state  |  email  |  password  |  repeat-password  |
+    | <first-name> | <last-name> | <Country> | <state> | <email> | <password> | <repeat-password> |
+  Quando ele aciona o botão de criar uma conta
+  Então a tela de welcome deve ser apresentada
+Exemplos: 
+  |  first-name  |  last-name  |  Country  |  state  |      email     |  password  |  repeat-password  |
+  |    "Juca"    |   "Silva"   |  "Brazil" |    ""   |"juca@gmail.com"| "password" |     "password"    |
+  |    "Juca"    |   "Silva"   |  "Brazil" |   "SP"  |"juca@gmail.com"| "password" |     "password"    |
 
-
-Scenario Outline: Creating a new account
-  Given the account balance is $<balance>
-    And the card is valid
-    And the machine contains enough money  
-   When the Account Holder requests $<requested>
-   Then the ATM should dispense $<dispenced>
-    And the account balance should be $<new-balance>
-    And the card should be returned
-  Examples: 
-    | fisrt-name | last-name | age | register-id | 
-    | Juca      | Fernandes | 32  | 50227852-7  | 
-  
-  
+@negativo @CriarContaDadosInvalidos
+Cenario: Tentativa de cadastro com dados inválidos
+  E que ele preenche os campos com os seguintes dados:
+    |  first-name  |  last-name  |  Country  |  state  |  email  |  password  |  repeat-password  |
+    | <first-name> | <last-name> | <Country> | <state> | <email> | <password> | <repeat-password> |
+  Então o sistema deverá apresentar a mensagem "<mensagem>"
+Exemplos: 
+  |  first-name  |  last-name  |  Country  |  state  |      email     |  password  |  repeat-password  | mensagem                                                                                                          |
+  |      ""      |      ""     |  "Brazil" |    ""   |        ""      |     ""     |         ""        | "{registration.password.not.empty} Field required User name is required Field required Email address is required" |
+  |    "Juca"    |      ""     |  "Brazil" |    ""   |        ""      |     ""     |         ""        | "User name is required Field required Email address is required {registration.password.not.empty}"                |
+  |    "Juca"    |   "Silva"   |  "Brazil" |    ""   |        ""      |     ""     |         ""        | "Email address is required {registration.password.not.empty} User name is required"                               |
+  |    "Juca"    |   "Silva"   |  "Brazil" |    ""   |"juca@gmail.com"|     ""     |         ""        | "{registration.password.not.empty}"                                                                               |
+  |    "Juca"    |   "Silva"   |  "Brazil" |    ""   |"juca@gmail.com"| "password" |         ""        | "password.notequal"                                                                                               |
+  |    "Juca"    |   "Silva"   |  "Brazil" |    ""   |"juca@gmail.com"| "password" |     "password"    | "password.notequal"                                                                                               |
+  |    "Juca"    |     ""      |  "Brazil" |    ""   |"juca@gmail.com"| "password" |     "password"    | "Field required"                                                                                                  |
+  |    "Juca"    |   "Silva"   |  "Brazil" |   "SP"  |        ""      |     ""     |         ""        | "Email address is required {registration.password.not.empty} User name is required"                               |
